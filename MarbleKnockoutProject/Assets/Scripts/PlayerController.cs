@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private GameObject focalPoint;
+    // private GameObject focalPoint;
     private Rigidbody playerRb;
     public float speed = 5;
 
@@ -18,7 +18,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
-        focalPoint = GameObject.Find("Focal Point");
+        powerUpOffset = powerUpIndicator.transform.position;
+        // focalPoint = GameObject.Find("Focal Point");
         // code needed here?
     }
 
@@ -31,9 +32,11 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         float forwardInput = Input.GetAxis("Vertical");
-        //playerRb.AddForce(Vector3.forward * forwardInput * speed);
-        playerRb.AddForce(focalPoint.transform.forward * forwardInput * speed);
-        powerUpIndicator.transform.forward = transform.postion + powerUpOffset;
+        float sideInput = Input.GetAxis("Horizontal");
+        playerRb.AddForce(Vector3.forward * forwardInput * speed);
+        playerRb.AddForce(Vector3.right * sideInput * speed);
+        // playerRb.AddForce(focalPoint.transform.forward * forwardInput * speed);
+        powerUpIndicator.transform.forward = transform.position + powerUpOffset;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,7 +46,7 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
             hasPowerup = true;
             StartCoroutine(PowerupCountdownRoutine());
-            powerUpIndicator.GameObject; // code incomplete here
+            powerUpIndicator.gameObject.SetActive(true); // code incomplete here
         }
     }
 
@@ -52,7 +55,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy") && hasPowerup)
         {
             Rigidbody enemyRb = collision.gameObject.GetComponent<Rigidbody>();
-            Vector3 awayFromPLayer = collision.gameObject.transform.postion - transform.postion;
+            Vector3 awayFromPLayer = collision.gameObject.transform.position - transform.position;
 
             enemyRb.AddForce(awayFromPLayer * powerUpStrength, ForceMode.Impulse);
         }
@@ -62,6 +65,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(powerUpTime);
         hasPowerup = false;
-        powerUpIndicator // code incomplete here
+        powerUpIndicator.gameObject.SetActive(false);
+        // powerUpIndicator // code incomplete here
     }
 }
