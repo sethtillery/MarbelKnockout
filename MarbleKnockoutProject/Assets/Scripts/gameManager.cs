@@ -10,6 +10,8 @@ public class gameManager : MonoBehaviour
     public Text countdownDisplay;
     public static gameManager instance;
     public bool gamePlaying { get; private set; }
+    public SpawnManager spawn;
+    public Timer timer;
    
     private float startTime, elapsedTime;
     TimeSpan timeplaying;
@@ -18,10 +20,12 @@ public class gameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        countdownDisplay.gameObject.SetActive(false);
     }
 
     public IEnumerator countdownToStart()
     {
+        countdownDisplay.gameObject.SetActive(true);
         while (countdownTime > 0)
         {
             countdownDisplay.text = countdownTime.ToString();
@@ -36,6 +40,8 @@ public class gameManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        timer.timeText.gameObject.SetActive(true);
+        spawn.spawnSafetyDome();
         countdownDisplay.gameObject.SetActive(false);
     }
 
@@ -43,7 +49,7 @@ public class gameManager : MonoBehaviour
     void Start()
     {
         gamePlaying = false;
-        StartCoroutine(countdownToStart());
+        //StartCoroutine(countdownToStart());
     }
     
     public void BeginGame()
