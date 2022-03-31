@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 4810118436999522283}
   - component: {fileID: 4810118436999522282}
   - component: {fileID: 4810118436999522281}
+  - component: {fileID: -3426633493366436256}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Player2
   m_TagString: player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,3 +128,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1837918343248922855, guid: faa2eb42bfe9d874f8fcbf6f2ef3f7fa, type: 3}
   speed: 3
+--- !u!114 &-3426633493366436256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4810118436999522280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be524d96b18514911a68aa4da54a67cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  isSafe: 0
+  hasPowerup: 0
+  powerUpStrength: 15
+  powerUpTime: 5
+  powerUpIndicator: {fileID: 2424808277344680160, guid: 26fe42ca45dd9834fb6de3987a3e9567, type: 3}
+  manager: {fileID: 8142186194919414493, guid: 140146e80079c5c4fbca1e5b527ceb40, type: 3}
+  timer: {fileID: 0}

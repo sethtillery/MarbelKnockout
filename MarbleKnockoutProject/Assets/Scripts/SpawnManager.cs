@@ -17,6 +17,7 @@ public class SpawnManager : MonoBehaviour
     public gameManager manager;
     public bool decrementTime = true;
     public bool spawnDome = true;
+    public int domeCounter = 0;
     
 
     // Start is called before the first frame update
@@ -65,6 +66,10 @@ public class SpawnManager : MonoBehaviour
         {
             Destroy(killDome);
             spawnSafetyDome();
+            if (domeCounter == 2 || domeCounter == 4)
+            {
+                SpawnPowerup();
+            }
         }
     }
 
@@ -84,6 +89,7 @@ public class SpawnManager : MonoBehaviour
     { 
         Instantiate(safetyDome, GenerateSpawnPosition(), safetyDome.transform.rotation);
         safetyDome.transform.localScale -= new Vector3(2, 2, 2);
+        domeCounter++;
     }
 
     void spawnPlayers()

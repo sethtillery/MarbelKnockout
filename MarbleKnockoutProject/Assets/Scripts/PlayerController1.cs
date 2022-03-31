@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController1 : MonoBehaviour
 {
     // private GameObject focalPoint;
     private Rigidbody playerRb;
@@ -13,9 +13,7 @@ public class PlayerController : MonoBehaviour
     public float powerUpStrength = 15;
     public float powerUpTime = 5;
     public GameObject powerUpIndicator;
-    [SerializeField]
     private float forwardInput;
-    [SerializeField]
     private float sideInput;
     public gameManager manager;
 
@@ -49,26 +47,25 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(gameManager.instance.gamePlaying)
-            GetPlayerInput();        
+        if (gameManager.instance.gamePlaying)
+            GetPlayerInput();
     }
 
     private void GetPlayerInput()
     {
         forwardInput = Input.GetAxis("Vertical");
         sideInput = Input.GetAxis("Horizontal");
-
-        if(Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.UpArrow))
             playerRb.AddForce(Vector3.forward * forwardInput * speed);
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.LeftArrow))
             playerRb.AddForce(Vector3.right * sideInput * speed);
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.DownArrow))
             playerRb.AddForce(Vector3.forward * forwardInput * speed);
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.RightArrow))
             playerRb.AddForce(Vector3.right * sideInput * speed);
 
-        
-        powerUpIndicator.transform.position = transform.position + powerUpOffset;  
+
+        powerUpIndicator.transform.position = transform.position + powerUpOffset;
     }
 
     // OnTriggerStay is called once per frame for every Collider other that is touching the trigger
@@ -76,8 +73,8 @@ public class PlayerController : MonoBehaviour
     {
         if (!other.CompareTag("SafetyDome"))
         {
-            
-                isSafe = true;
+
+            isSafe = true;
         }
     }
 
@@ -90,7 +87,7 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
             hasPowerup = true;
             StartCoroutine(PowerupCountdownRoutine());
-            powerUpIndicator.gameObject.SetActive(true); 
+            powerUpIndicator.gameObject.SetActive(true);
         }
         if (other.CompareTag("SafetyDome"))
         {
@@ -107,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("player2") && hasPowerup)
+        if (collision.gameObject.CompareTag("player1") && hasPowerup)
         {
             Rigidbody enemyRb = collision.gameObject.GetComponent<Rigidbody>();
             Vector3 awayFromPLayer = collision.gameObject.transform.position - transform.position;

@@ -1326,10 +1326,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4932591311057358050, guid: 19302eb375b960b4b912e45c0fd6b8a6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5423154694671894271, guid: 19302eb375b960b4b912e45c0fd6b8a6, type: 3}
       propertyPath: spawn
       value: 
@@ -1747,10 +1743,6 @@ PrefabInstance:
       propertyPath: timer
       value: 
       objectReference: {fileID: 1284113397}
-    - target: {fileID: 8142186194919414493, guid: 140146e80079c5c4fbca1e5b527ceb40, type: 3}
-      propertyPath: countdownTime
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 8142186194919414493, guid: 140146e80079c5c4fbca1e5b527ceb40, type: 3}
       propertyPath: countdownDisplay
       value: 

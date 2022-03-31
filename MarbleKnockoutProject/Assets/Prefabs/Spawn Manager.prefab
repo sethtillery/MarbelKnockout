@@ -50,3 +50,5 @@ MonoBehaviour:
   player2: {fileID: 4810118436999522280, guid: fcf71da09188e0c42bf8b3b950e1695b, type: 3}
   player: {fileID: 1837918343248922849, guid: faa2eb42bfe9d874f8fcbf6f2ef3f7fa, type: 3}
   manager: {fileID: 0}
+  decrementTime: 1
+  spawnDome: 1
