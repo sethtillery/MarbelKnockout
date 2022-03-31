@@ -13,10 +13,13 @@ public class SpawnManager : MonoBehaviour
     GameObject killPlayer2;
     public GameObject player1;
     public GameObject player2;
+    public PlayerController player;
+    public gameManager manager;
 
     // Start is called before the first frame update
     void Awake()
     {
+        
         spawnPlayers();
         safetyDome.transform.localScale = new Vector3(14, 14, 14);
         spawnSafetyDome();    
@@ -24,12 +27,31 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator waitToResetScene()
     {
-        yield return  new WaitForSeconds(3);
+       yield return  new WaitForSeconds(3);
+       killPlayer1 = GameObject.FindGameObjectWithTag("player1");
+       killPlayer2 = GameObject.FindGameObjectWithTag("player2");
+
+       if (!killPlayer1 || !killPlayer2)
+       {
+            if (!killPlayer1)
+                Destroy(killPlayer2);
+
+            if (!killPlayer2)
+                Destroy(killPlayer1);
+
+            timer.timeValue = 11;
+            Destroy(killDome);
+            safetyDome.transform.localScale = new Vector3(14, 14, 14);
+            spawnPlayers();
+            StartCoroutine(manager.countdownToStart());
+            spawnSafetyDome();
+       }
     }
     // Update is called once per frame
     void Update()
     {
-        resetScene();
+        if (!killPlayer1 || !killPlayer2)
+            resetScene();
 
         killDome = GameObject.FindGameObjectWithTag("SafetyDome");
 
@@ -67,22 +89,6 @@ public class SpawnManager : MonoBehaviour
     void resetScene()
     {
         StartCoroutine(waitToResetScene());
-       killPlayer1 = GameObject.FindGameObjectWithTag("player1");
-       killPlayer2 = GameObject.FindGameObjectWithTag("player2");
-
-       if (!killPlayer1 || !killPlayer2)
-       {
-            if (!killPlayer1)
-                Destroy(killPlayer2, 3);
-
-            if (!killPlayer2)
-                Destroy(killPlayer1, 3);
-
-            Destroy(killDome);
-            safetyDome.transform.localScale = new Vector3(14, 14, 14);
-            spawnPlayers();
-            spawnSafetyDome();
-       }
         
     }
 }

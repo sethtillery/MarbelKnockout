@@ -13,7 +13,10 @@ public class PlayerController : MonoBehaviour
     public float powerUpStrength = 15;
     public float powerUpTime = 5;
     public GameObject powerUpIndicator;
-    
+    private float forwardInput;
+    private float sideInput;
+
+
     public Timer timer;
 
     // Start is called before the first frame update
@@ -26,35 +29,46 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (timer.timeValue > 10.99 && isSafe == true)
+            isSafe = false;
+
         if (transform.position.y < -10)
         {
             Destroy(gameObject);
         }
 
-        if (timer.timeValue < 0.01 && !isSafe)
+        if (timer.timeValue < 0.00001 && !isSafe)
         {
             Destroy(gameObject);
         }
-
     }
 
     private void FixedUpdate()
     {
-        float forwardInput = Input.GetAxis("Vertical");
-        float sideInput = Input.GetAxis("Horizontal");
-        playerRb.AddForce(Vector3.forward * forwardInput * speed);
-        playerRb.AddForce(Vector3.right * sideInput * speed);
-        powerUpIndicator.transform.position = transform.position + powerUpOffset;
+        if(gameManager.instance.gamePlaying)
+            GetPlayerInput();        
     }
 
+    private void GetPlayerInput()
+    {   
+        forwardInput = Input.GetAxis("Vertical");
+        sideInput = Input.GetAxis("Horizontal");
+        playerRb.AddForce(Vector3.forward * forwardInput * speed);
+        playerRb.AddForce(Vector3.right * sideInput * speed);
+        powerUpIndicator.transform.position = transform.position + powerUpOffset;  
+    }
+
+    // OnTriggerStay is called once per frame for every Collider other that is touching the trigger
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("SafetyDome"))
+        if (!other.CompareTag("SafetyDome"))
         {
-            isSafe = true;
+            
+                isSafe = false;
         }
-        
     }
+
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -64,6 +78,10 @@ public class PlayerController : MonoBehaviour
             hasPowerup = true;
             StartCoroutine(PowerupCountdownRoutine());
             powerUpIndicator.gameObject.SetActive(true); 
+        }
+        if (other.CompareTag("SafetyDome"))
+        {
+            isSafe = true;
         }
     }
     private void OnTriggerExit(Collider other)
