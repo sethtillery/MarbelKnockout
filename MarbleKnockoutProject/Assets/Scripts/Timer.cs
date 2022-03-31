@@ -7,23 +7,23 @@ public class Timer : MonoBehaviour
 {
     public float timeValue = 10f;
     public Text timeText;
+    public gameManager manager;
     
 
     // Update is called once per frame
     void Update()
     {
-        if(timeValue > 0)
-            timeValue -= Time.deltaTime;
-        else
+        if (manager.gamePlaying)
         {
-            timeValue += 11;
-        }
+            if (timeValue > 0)
+                timeValue -= Time.deltaTime;
+            else
+            {
+                timeValue += 11;
+            }
 
-        if(!GameObject.FindGameObjectWithTag("player1") || !GameObject.FindGameObjectWithTag("player2"))
-        {
-            timeValue = 10;
+            DisplayTime(timeValue);
         }
-        DisplayTime(timeValue);
         
     }
 
@@ -37,5 +37,5 @@ public class Timer : MonoBehaviour
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
 
         timeText.text = string.Format("{0:00}", seconds);
-        }
+    }
 }
