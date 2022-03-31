@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public GameObject powerUpIndicator;
     private float forwardInput;
     private float sideInput;
+    public gameManager manager;
 
 
     public Timer timer;
@@ -22,14 +23,15 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        manager = GameObject.Find("GameManager").GetComponent<gameManager>();
         playerRb = GetComponent<Rigidbody>();
         powerUpOffset = powerUpIndicator.transform.position;
-        timer = GameObject.Find("Timer").GetComponentInChildren<Timer>();
+        timer = manager.timer;
     }
 
     private void Update()
     {
-        if (timer.timeValue > 10.99 && isSafe == true)
+        if (timer.timeValue > 10.90 && isSafe == true)
             isSafe = false;
 
         if (transform.position.y < -10)
@@ -64,7 +66,7 @@ public class PlayerController : MonoBehaviour
         if (!other.CompareTag("SafetyDome"))
         {
             
-                isSafe = false;
+                isSafe = true;
         }
     }
 

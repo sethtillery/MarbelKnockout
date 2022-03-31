@@ -15,18 +15,23 @@ public class SpawnManager : MonoBehaviour
     public GameObject player2;
     public PlayerController player;
     public gameManager manager;
+    public bool decrementTime = true;
+    public bool spawnDome = true;
+    
 
     // Start is called before the first frame update
     void Awake()
     {
         
         spawnPlayers();
-        safetyDome.transform.localScale = new Vector3(14, 14, 14);
-        spawnSafetyDome();    
+        safetyDome.transform.localScale = new Vector3(14, 14, 14);   
     }
 
     IEnumerator waitToResetScene()
     {
+       Destroy(killDome);
+       spawnDome = false;
+       decrementTime = false;
        yield return  new WaitForSeconds(3);
        killPlayer1 = GameObject.FindGameObjectWithTag("player1");
        killPlayer2 = GameObject.FindGameObjectWithTag("player2");
@@ -40,10 +45,11 @@ public class SpawnManager : MonoBehaviour
                 Destroy(killPlayer1);
 
             timer.timeValue = 11;
-            Destroy(killDome);
+            decrementTime = true;
+            spawnDome = true;
             safetyDome.transform.localScale = new Vector3(14, 14, 14);
             spawnPlayers();
-            StartCoroutine(manager.countdownToStart());
+            //StartCoroutine(manager.countdownToStart());
             spawnSafetyDome();
        }
     }
@@ -55,7 +61,7 @@ public class SpawnManager : MonoBehaviour
 
         killDome = GameObject.FindGameObjectWithTag("SafetyDome");
 
-        if(timer.timeValue < 0.00001)
+        if(timer.timeValue < 0.00001 && !spawnDome)
         {
             Destroy(killDome);
             spawnSafetyDome();
@@ -74,7 +80,7 @@ public class SpawnManager : MonoBehaviour
         Instantiate(powerUpPrefab, GenerateSpawnPosition(), powerUpPrefab.transform.rotation);
     }
 
-    void spawnSafetyDome()
+     public void spawnSafetyDome()
     { 
         Instantiate(safetyDome, GenerateSpawnPosition(), safetyDome.transform.rotation);
         safetyDome.transform.localScale -= new Vector3(2, 2, 2);
