@@ -1,42 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using Cinemachine;
 
-public class MainMenu : MonoBehaviour
+public class mainMenu : MonoBehaviour
 {
-    public string firstGameScene;
+    public gameManager manager;
+    public CinemachineVirtualCamera camera1;
+    public CinemachineVirtualCamera camera2;
+    public Canvas MainMenuCanvas;
 
     // Start is called before the first frame update
     void Start()
     {
-        SceneManager.LoadScene(firstGameScene);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         
     }
 
-    public void StartGame()
+    public void PlayGame()
     {
-
-    }
-
-    public void OptionsMenuOpen()
-    {
-
-    }
-
-    public void OptionsMenuClose()
-    {
-
-    }
-
-    public void ExitGame()
-    {
-        Application.Quit();
-        Debug.Log("Quitting game...");
+        GameObject playbutton = MainMenuCanvas.transform.Find("PlayGame Button").gameObject;
+        playbutton.SetActive(false);
+        camera2.Priority = 3;
+        StartCoroutine(manager.countdownToStart());
     }
 }
