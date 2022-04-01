@@ -229,6 +229,9 @@ MonoBehaviour:
   timeText: {fileID: 5423154694671894270}
   manager: {fileID: 0}
   spawn: {fileID: 0}
+  decrementTime: 1
+  playerOneController: {fileID: 0}
+  playerTwoController: {fileID: 0}
 --- !u!114 &8425028895963951978
 MonoBehaviour:
   m_ObjectHideFlags: 0

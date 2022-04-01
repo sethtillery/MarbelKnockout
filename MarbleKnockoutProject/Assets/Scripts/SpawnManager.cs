@@ -15,15 +15,14 @@ public class SpawnManager : MonoBehaviour
     public GameObject player2;
     public PlayerController player;
     public gameManager manager;
-    public bool decrementTime = true;
-    public bool spawnDome = true;
+    public int playerOneScore = 0;
+    public int playerTwoScore = 0;
     public int domeCounter = 0;
     
 
     // Start is called before the first frame update
     void Awake()
     {
-        
         spawnPlayers();
         safetyDome.transform.localScale = new Vector3(14, 14, 14);   
     }
@@ -31,8 +30,7 @@ public class SpawnManager : MonoBehaviour
     IEnumerator waitToResetScene()
     {
        Destroy(killDome);
-       spawnDome = false;
-       decrementTime = false;
+   
        yield return  new WaitForSeconds(3);
        killPlayer1 = GameObject.FindGameObjectWithTag("player1");
        killPlayer2 = GameObject.FindGameObjectWithTag("player2");
@@ -40,14 +38,33 @@ public class SpawnManager : MonoBehaviour
        if (!killPlayer1 || !killPlayer2)
        {
             if (!killPlayer1)
+            { 
+                playerTwoScore++;
+
+                if (playerTwoScore == 2)
+                {
+                    manager.gamePlaying = false;
+                    manager.showWinScreen = true;
+                }
+
                 Destroy(killPlayer2);
+            }
 
             if (!killPlayer2)
+            {
+                playerOneScore++;
+
+                if (playerOneScore == 2)
+                {
+                    manager.gamePlaying = false;
+                    manager.showWinScreen = true;
+                }
+
                 Destroy(killPlayer1);
+            }
 
             timer.timeValue = 11;
-            decrementTime = true;
-            spawnDome = true;
+            timer.decrementTime = true;
             safetyDome.transform.localScale = new Vector3(14, 14, 14);
             spawnPlayers();
             //StartCoroutine(manager.countdownToStart());
@@ -58,11 +75,13 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         if (!killPlayer1 || !killPlayer2)
+        {
             resetScene();
+        }
 
         killDome = GameObject.FindGameObjectWithTag("SafetyDome");
 
-        if(timer.timeValue < 0.00001 && !spawnDome)
+        if(timer.timeValue < 0.00001 && killPlayer1 && killPlayer2)
         {
             Destroy(killDome);
             spawnSafetyDome();

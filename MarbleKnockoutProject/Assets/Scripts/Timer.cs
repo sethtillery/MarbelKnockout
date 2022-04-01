@@ -9,6 +9,9 @@ public class Timer : MonoBehaviour
     public Text timeText;
     public gameManager manager;
     public SpawnManager spawn;
+    public bool decrementTime = true;
+    public GameObject playerOneController;
+    public GameObject playerTwoController;
 
     private void Start()
     {
@@ -19,7 +22,13 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (manager.gamePlaying && !spawn.decrementTime)
+        playerOneController = GameObject.FindGameObjectWithTag("player1");
+        playerTwoController = GameObject.FindGameObjectWithTag("player2");
+
+        if (!playerOneController || !playerTwoController)
+            decrementTime = false;
+
+        if (manager.gamePlaying && decrementTime)
         {
             if (timeValue > 0)
                 timeValue -= Time.deltaTime;
@@ -29,6 +38,10 @@ public class Timer : MonoBehaviour
             }
 
             DisplayTime(timeValue);
+        }
+        if(!manager.gamePlaying)
+        {
+            timeText.gameObject.SetActive(false);
         }
         
     }

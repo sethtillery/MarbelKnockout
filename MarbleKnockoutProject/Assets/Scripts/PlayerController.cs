@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     private float sideInput;
     public gameManager manager;
 
-
     public Timer timer;
 
     // Start is called before the first frame update
@@ -60,10 +59,13 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKey(KeyCode.W))
             playerRb.AddForce(Vector3.forward * forwardInput * speed);
+
         if (Input.GetKey(KeyCode.A))
             playerRb.AddForce(Vector3.right * sideInput * speed);
+
         if (Input.GetKey(KeyCode.S))
             playerRb.AddForce(Vector3.forward * forwardInput * speed);
+
         if (Input.GetKey(KeyCode.D))
             playerRb.AddForce(Vector3.right * sideInput * speed);
 

@@ -9,9 +9,11 @@ public class gameManager : MonoBehaviour
     public int countdownTime;
     public Text countdownDisplay;
     public static gameManager instance;
-    public bool gamePlaying { get; private set; }
+    public bool gamePlaying;
+    public bool showWinScreen = false;
     public SpawnManager spawn;
     public Timer timer;
+    public int ScoreToWin;
    
     private float startTime, elapsedTime;
     TimeSpan timeplaying;
@@ -39,6 +41,7 @@ public class gameManager : MonoBehaviour
         countdownDisplay.text = "GO!";
 
         yield return new WaitForSeconds(1f);
+
 
         timer.timeText.gameObject.SetActive(true);
         spawn.spawnSafetyDome();
