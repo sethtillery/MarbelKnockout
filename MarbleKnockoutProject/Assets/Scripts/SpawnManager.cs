@@ -62,6 +62,8 @@ public class SpawnManager : MonoBehaviour
                     if(player2.GetComponent<Renderer>().sharedMaterial == useMaterialList[0])
                     {
                         winScreenBackground.material = materialList[0];
+                        manager.musicList[1].Stop();
+                        manager.musicList[6].Play();
                         manager.gamePlaying = false;
                         manager.showWinScreen = true;
                     }
@@ -69,6 +71,8 @@ public class SpawnManager : MonoBehaviour
                     if (player2.GetComponent<Renderer>().sharedMaterial == useMaterialList[1])
                     {
                         winScreenBackground.material = materialList[1];
+                        manager.musicList[1].Stop();
+                        manager.musicList[6].Play();
                         manager.gamePlaying = false;
                         manager.showWinScreen = true;
                     }
@@ -76,6 +80,8 @@ public class SpawnManager : MonoBehaviour
                     if (player2.GetComponent<Renderer>().sharedMaterial == useMaterialList[2])
                     {
                         winScreenBackground.material = materialList[2];
+                        manager.musicList[1].Stop();
+                        manager.musicList[6].Play();
                         manager.gamePlaying = false;
                         manager.showWinScreen = true;
                     }
@@ -83,6 +89,8 @@ public class SpawnManager : MonoBehaviour
                     if (player2.GetComponent<Renderer>().sharedMaterial == useMaterialList[3])
                     {
                         winScreenBackground.material = materialList[3];
+                        manager.musicList[1].Stop();
+                        manager.musicList[6].Play();
                         manager.gamePlaying = false;
                         manager.showWinScreen = true;
                     }
@@ -90,6 +98,8 @@ public class SpawnManager : MonoBehaviour
                     if (player2.GetComponent<Renderer>().sharedMaterial == useMaterialList[4])
                     {
                         winScreenBackground.material = materialList[4];
+                        manager.musicList[1].Stop();
+                        manager.musicList[6].Play();
                         manager.gamePlaying = false;
                         manager.showWinScreen = true;
                     }
@@ -97,6 +107,8 @@ public class SpawnManager : MonoBehaviour
                     if (player2.GetComponent<Renderer>().sharedMaterial == useMaterialList[5])
                     {
                         winScreenBackground.material = materialList[5];
+                        manager.musicList[1].Stop();
+                        manager.musicList[6].Play();
                         manager.gamePlaying = false;
                         manager.showWinScreen = true;
                     }
@@ -104,6 +116,8 @@ public class SpawnManager : MonoBehaviour
                     if (player2.GetComponent<Renderer>().sharedMaterial == useMaterialList[6])
                     {
                         winScreenBackground.material = materialList[6];
+                        manager.musicList[1].Stop();
+                        manager.musicList[6].Play();
                         manager.gamePlaying = false;
                         manager.showWinScreen = true;
                     }
@@ -128,6 +142,8 @@ public class SpawnManager : MonoBehaviour
                     if (player1.GetComponent<Renderer>().sharedMaterial == useMaterialList[0])
                     {
                         winScreenBackground.material = materialList[0];
+                        manager.musicList[1].Stop();
+                        manager.musicList[6].Play();
                         manager.gamePlaying = false;
                         manager.showWinScreen = true;
                     }
@@ -135,6 +151,8 @@ public class SpawnManager : MonoBehaviour
                     if (player1.GetComponent<Renderer>().sharedMaterial == useMaterialList[1])
                     {
                         winScreenBackground.material = materialList[1];
+                        manager.musicList[1].Stop();
+                        manager.musicList[6].Play();
                         manager.gamePlaying = false;
                         manager.showWinScreen = true;
                     }
@@ -142,6 +160,8 @@ public class SpawnManager : MonoBehaviour
                     if (player1.GetComponent<Renderer>().sharedMaterial == useMaterialList[2])
                     {
                         winScreenBackground.material = materialList[2];
+                        manager.musicList[1].Stop();
+                        manager.musicList[6].Play();
                         manager.gamePlaying = false;
                         manager.showWinScreen = true;
                     }
@@ -149,6 +169,8 @@ public class SpawnManager : MonoBehaviour
                     if (player1.GetComponent<Renderer>().sharedMaterial == useMaterialList[3])
                     {
                         winScreenBackground.material = materialList[3];
+                        manager.musicList[1].Stop();
+                        manager.musicList[6].Play();
                         manager.gamePlaying = false;
                         manager.showWinScreen = true;
                     }
@@ -156,6 +178,8 @@ public class SpawnManager : MonoBehaviour
                     if (player1.GetComponent<Renderer>().sharedMaterial == useMaterialList[4])
                     {
                         winScreenBackground.material = materialList[4];
+                        manager.musicList[1].Stop();
+                        manager.musicList[6].Play();
                         manager.gamePlaying = false;
                         manager.showWinScreen = true;
                     }
@@ -163,6 +187,8 @@ public class SpawnManager : MonoBehaviour
                     if (player1.GetComponent<Renderer>().sharedMaterial == useMaterialList[5])
                     {
                         winScreenBackground.material = materialList[5];
+                        manager.musicList[1].Stop();
+                        manager.musicList[6].Play();
                         manager.gamePlaying = false;
                         manager.showWinScreen = true;
                     }
@@ -170,6 +196,8 @@ public class SpawnManager : MonoBehaviour
                     if (player1.GetComponent<Renderer>().sharedMaterial == useMaterialList[6])
                     {
                         winScreenBackground.material = materialList[6];
+                        manager.musicList[1].Stop();
+                        manager.musicList[6].Play();
                         manager.gamePlaying = false;
                         manager.showWinScreen = true;
                     }
@@ -184,15 +212,40 @@ public class SpawnManager : MonoBehaviour
             safetyDome.transform.localScale = new Vector3(14, 14, 14);
             Destroy(killDome);
             spawnPlayers();
-           // player1.GetComponent<PlayerController>().powerUpIndicator = ;
-     
-            //StartCoroutine(manager.countdownToStart());
+
+            if (singlePlayer)
+            {
+                GameObject.FindGameObjectWithTag("player2").GetComponent<Enemy>().enabled = true;
+                GameObject.FindGameObjectWithTag("player2").GetComponent<PlayerController1>().enabled = false;
+
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("player2").GetComponent<Enemy>().enabled = false;
+                GameObject.FindGameObjectWithTag("player2").GetComponent<PlayerController1>().enabled = true;
+            }
+            enemy = GameObject.FindGameObjectWithTag("player2").GetComponent<Enemy>();
+            enemy.player = GameObject.FindGameObjectWithTag("player1");
+
             spawnSafetyDome();
        }
     }
     // Update is called once per frame
     void Update()
     {
+        if(killPlayer1)
+        {
+            enemy.player = GameObject.FindGameObjectWithTag("player1");
+        }
+        if(playerOneGameScore == 1 || playerTwoGameScore == 1)       
+            manager.musicList[1].pitch = (float)1.5;
+        
+        if(playerOneGameScore == 2 && playerTwoGameScore == 2)      
+            manager.musicList[1].pitch = 2;       
+
+        if (playerOneGameScore == 3 && playerTwoGameScore == 3)        
+            manager.musicList[1].pitch = 3;       
+
         if (!killPlayer1 || !killPlayer2)
         {
             resetScene();
@@ -216,7 +269,6 @@ public class SpawnManager : MonoBehaviour
         float spawnPosX = Random.Range(-spawnRange, spawnRange);
         float spawnPosZ = Random.Range(-spawnRange, spawnRange);
         return new Vector3(spawnPosX, 0, spawnPosZ);
-        // code missing here
     }
     void SpawnPowerup()
     {

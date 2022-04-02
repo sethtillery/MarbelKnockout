@@ -40,11 +40,13 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y < -10)
         {
             Destroy(gameObject);
+            manager.musicList[4].Play();
         }
 
         if (timer.timeValue < 0.00001 && !isSafe)
         {
             Destroy(gameObject);
+            manager.musicList[4].Play();
         }
     }
 
@@ -91,6 +93,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Powerup"))
         {
+            manager.musicList[5].Play();
             Destroy(other.gameObject);
             hasPowerup = true;
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
@@ -111,8 +114,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.CompareTag("player2"))
+        {
+            manager.musicList[2].Play();
+
+        }
         if (collision.gameObject.CompareTag("player2") && hasPowerup)
         {
+            manager.musicList[3].Play();
             Rigidbody enemyRb = collision.gameObject.GetComponent<Rigidbody>();
             Vector3 awayFromPLayer = collision.gameObject.transform.position - transform.position;
 

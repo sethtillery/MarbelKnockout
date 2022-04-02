@@ -43,6 +43,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
+        manager.musicList[8].Play();
         pauseMenu.gameObject.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
@@ -51,6 +52,7 @@ public class PauseMenu : MonoBehaviour
     //loads main menu
     public void BackToMainMenu()
     {
+        manager.musicList[8].Play();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1f;
     }

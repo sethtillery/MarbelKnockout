@@ -54,6 +54,7 @@ public class WinScreen : MonoBehaviour
 
     public void BackToMainMenu()
     {
+        manager.musicList[8].Play();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

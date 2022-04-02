@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class gameManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class gameManager : MonoBehaviour
     public int gamesToWin = 1;
     public bool twoSeries = false;
     public bool fourSeries = false;
+    public AudioSource[] musicList;
    
     private float startTime, elapsedTime;
     TimeSpan timeplaying;
@@ -30,21 +32,13 @@ public class gameManager : MonoBehaviour
 
     public IEnumerator countdownToStart()
     {
-        if (spawn.singlePlayer)
-        {
-            GameObject.FindGameObjectWithTag("player2").GetComponent<Enemy>().enabled = true;
-            GameObject.FindGameObjectWithTag("player2").GetComponent<PlayerController1>().enabled = false;
-
-        }
-        else
-        {
-            GameObject.FindGameObjectWithTag("player2").GetComponent<Enemy>().enabled = false;
-            GameObject.FindGameObjectWithTag("player2").GetComponent<PlayerController1>().enabled = true;
-        }
 
         countdownDisplay.gameObject.SetActive(true);
         while (countdownTime > 0)
         {
+            if(countdownTime == 3)
+                musicList[7].Play();
+
             countdownDisplay.text = countdownTime.ToString();
 
             yield return new WaitForSeconds(1f);
@@ -57,7 +51,7 @@ public class gameManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-
+        musicList[1].Play();
         timer.timeText.gameObject.SetActive(true);
         spawn.spawnSafetyDome();
         countdownDisplay.gameObject.SetActive(false);

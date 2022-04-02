@@ -23,7 +23,6 @@ public class mainMenu : MonoBehaviour
     GameObject p1;
     GameObject p2;
 
-
     private void Start()
     {
         p1 = GameObject.FindGameObjectWithTag("player1");
@@ -46,15 +45,18 @@ public class mainMenu : MonoBehaviour
     {
         spawn.singlePlayer = true;
         spawn.multiplayer = false;
+        manager.musicList[8].Play();
     }
 
     public void Multiplayer()
     {
         spawn.singlePlayer = false;
         spawn.multiplayer = true;
+        manager.musicList[8].Play();
     }
     public void PlayGame()
     {
+        manager.musicList[8].Play();
         GameObject titleText = MainMenuCanvas.transform.GetChild(0).Find("Title Text").gameObject;
         titleText.SetActive(false);
 
@@ -70,12 +72,15 @@ public class mainMenu : MonoBehaviour
         GameObject exitButton = MainMenuCanvas.transform.GetChild(0).Find("Quit Game Button").gameObject;
         exitButton.SetActive(false);
 
+        manager.musicList[0].Stop();
+
         camera2.Priority = 3;
         StartCoroutine(manager.countdownToStart());
     }
 
     public void Options()
     {
+        manager.musicList[8].Play();
         GameObject playbutton = MainMenuCanvas.transform.GetChild(0).Find("PlayGame Button").gameObject;
         playbutton.SetActive(false);
 
@@ -150,6 +155,7 @@ public class mainMenu : MonoBehaviour
 
     public void playerOneRed()
     {
+        manager.musicList[8].Play();
         rend.sharedMaterial = materialList[1];
         prefabRend.material = materialList[1];
         winScreenBackground.color = colorList[1];
@@ -157,6 +163,7 @@ public class mainMenu : MonoBehaviour
 
     public void playerOneBlack()
     {
+        manager.musicList[8].Play();
         rend.sharedMaterial = materialList[0];
         prefabRend.material = materialList[0];
         winScreenBackground.color = colorList[0];
@@ -164,6 +171,7 @@ public class mainMenu : MonoBehaviour
 
     public void playerOneBlue()
     {
+        manager.musicList[8].Play();
         rend.material = materialList[2];
         prefabRend.material = materialList[2];
         winScreenBackground.color = colorList[2];
@@ -171,6 +179,7 @@ public class mainMenu : MonoBehaviour
 
     public void playerOneGreen()
     {
+        manager.musicList[8].Play();
         rend.material = materialList[3];
         prefabRend.material = materialList[3];
         winScreenBackground.color = colorList[3];
@@ -178,6 +187,7 @@ public class mainMenu : MonoBehaviour
 
     public void playerOneOrange()
     {
+        manager.musicList[8].Play();
         rend.material = materialList[4];
         prefabRend.material = materialList[4];
         winScreenBackground.color = colorList[4];
@@ -185,6 +195,7 @@ public class mainMenu : MonoBehaviour
 
     public void playerOnePurple()
     {
+        manager.musicList[8].Play();
         rend.material = materialList[5];
         prefabRend.material = materialList[5];
         winScreenBackground.color = colorList[5];
@@ -192,6 +203,7 @@ public class mainMenu : MonoBehaviour
 
     public void playerOneYellow()
     {
+        manager.musicList[8].Play();
         rend.material = materialList[6];
         prefabRend.material = materialList[6];
         winScreenBackground.color = colorList[6];
@@ -199,6 +211,7 @@ public class mainMenu : MonoBehaviour
 
     public void playerTwoRed()
     {
+        manager.musicList[8].Play();
         rend2.material = materialList[1];
         prefabRedn2.material = materialList[1];
         winScreenBackground.color = colorList[1];
@@ -206,6 +219,7 @@ public class mainMenu : MonoBehaviour
 
     public void playerTwoBlack()
     {
+        manager.musicList[8].Play();
         rend2.material = materialList[0];
         prefabRedn2.material = materialList[0];
         winScreenBackground.color = colorList[0];
@@ -213,6 +227,7 @@ public class mainMenu : MonoBehaviour
 
     public void playerTwoBlue()
     {
+        manager.musicList[8].Play();
         rend2.material = materialList[2];
         prefabRedn2.material = materialList[2];
         winScreenBackground.color = colorList[2];
@@ -220,6 +235,7 @@ public class mainMenu : MonoBehaviour
 
     public void playerTwoGreen()
     {
+        manager.musicList[8].Play();
         rend2.material = materialList[3];
         prefabRedn2.material = materialList[3];
         winScreenBackground.color = colorList[3];
@@ -227,6 +243,7 @@ public class mainMenu : MonoBehaviour
 
     public void playerTwoOrange()
     {
+        manager.musicList[8].Play();
         rend2.material = materialList[4];
         prefabRedn2.material = materialList[4];
         winScreenBackground.color = colorList[4];
@@ -234,6 +251,7 @@ public class mainMenu : MonoBehaviour
 
     public void playerTwoPurple()
     {
+        manager.musicList[8].Play();
         rend2.material = materialList[5];
         prefabRedn2.material = materialList[5];
         winScreenBackground.color = colorList[5];
@@ -241,6 +259,7 @@ public class mainMenu : MonoBehaviour
 
     public void playerTwoYellow()
     {
+        manager.musicList[8].Play();
         rend2.material = materialList[6];
         prefabRedn2.material = materialList[6];
         winScreenBackground.color = colorList[6];
@@ -248,6 +267,7 @@ public class mainMenu : MonoBehaviour
 
     public void Controls()
     {
+        manager.musicList[8].Play();
         GameObject playbutton = MainMenuCanvas.transform.GetChild(0).Find("PlayGame Button").gameObject;
         playbutton.SetActive(false);
 
@@ -268,6 +288,7 @@ public class mainMenu : MonoBehaviour
 
     public void BackToMainMenuFromControls()
     {
+        manager.musicList[8].Play();
         controlsText.gameObject.SetActive(false);
         GameObject backButton = MainMenuCanvas.transform.GetChild(0).Find("Back To Main Menu").gameObject;
         backButton.SetActive(false);
@@ -287,6 +308,7 @@ public class mainMenu : MonoBehaviour
 
     public void BackToMainMenuFromOptions()
     {
+        manager.musicList[8].Play();
         seriesText.gameObject.SetActive(false);
 
         GameObject singlePlayerButton = MainMenuCanvas.transform.GetChild(0).Find("SinglePlayer").gameObject;
@@ -366,11 +388,13 @@ public class mainMenu : MonoBehaviour
 
     public void TwoSeries()
     {
+        manager.musicList[8].Play();
         manager.gamesToWin = 2;
     }
 
     public void FourSeries()
     {
+        manager.musicList[8].Play();
         manager.gamesToWin = 4;
     }
 }

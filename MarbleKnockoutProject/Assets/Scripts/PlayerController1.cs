@@ -40,11 +40,13 @@ public class PlayerController1 : MonoBehaviour
         if (transform.position.y < -10)
         {
             Destroy(gameObject);
+            manager.musicList[4].Play();
         }
 
         if (timer.timeValue < 0.00001 && !isSafe)
         {
             Destroy(gameObject);
+            manager.musicList[4].Play();
         }
     }
 
@@ -90,6 +92,7 @@ public class PlayerController1 : MonoBehaviour
     {
         if (other.CompareTag("Powerup"))
         {
+            manager.musicList[5].Play();
             Destroy(other.gameObject);
             hasPowerup = true;
             powerUpIndicator.SetActive(true);
@@ -112,6 +115,7 @@ public class PlayerController1 : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("player1") && hasPowerup)
         {
+            manager.musicList[3].Play();
             Rigidbody enemyRb = collision.gameObject.GetComponent<Rigidbody>();
             Vector3 awayFromPLayer = collision.gameObject.transform.position - transform.position;
 
