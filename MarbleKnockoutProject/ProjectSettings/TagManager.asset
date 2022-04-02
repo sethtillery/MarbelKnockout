@@ -9,6 +9,8 @@ TagManager:
   - SafetyDome
   - player1
   - player2
+  - powerupIndicator
+  - powerUpIndicator2
   layers:
   - Default
   - TransparentFX

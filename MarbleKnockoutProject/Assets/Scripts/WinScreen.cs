@@ -29,6 +29,7 @@ public class WinScreen : MonoBehaviour
     {
         if(manager.showWinScreen)
         {
+            Debug.Log("spawn screen");
             playerWin.gameObject.SetActive(true);
             background.gameObject.SetActive(true);
 
@@ -38,10 +39,10 @@ public class WinScreen : MonoBehaviour
             mainMenuButton.SetActive(true);
             ExitButton.SetActive(true);
 
-            if (spawn.playerOneScore == manager.ScoreToWin)
+            if (spawn.playerOneGameScore == manager.gamesToWin)
                 playerWin.text = "Player One Wins";
 
-            if (spawn.playerTwoScore == manager.ScoreToWin)
+            if (spawn.playerTwoGameScore == manager.gamesToWin)
                 playerWin.text = "Player Two Wins";
         }
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -13,23 +14,31 @@ public class SpawnManager : MonoBehaviour
     GameObject killPlayer2;
     public GameObject player1;
     public GameObject player2;
-    public PlayerController player;
     public gameManager manager;
     public int playerOneScore = 0;
     public int playerTwoScore = 0;
+    public int playerOneGameScore = 0;
+    public int playerTwoGameScore = 0;
     public int domeCounter = 0;
-    
+    public Color[] colorList;
+    public Image winScreenBackground;
+    public Material[] materialList;
+    public Material[] useMaterialList;
+    public bool singlePlayer = true;
+    public bool multiplayer = false;
+    public Enemy enemy;
+
 
     // Start is called before the first frame update
     void Awake()
     {
         spawnPlayers();
-        safetyDome.transform.localScale = new Vector3(14, 14, 14);   
+        safetyDome.transform.localScale = new Vector3(14, 14, 14);
+        enemy = player2.GetComponent<Enemy>();
     }
 
     IEnumerator waitToResetScene()
     {
-       Destroy(killDome);
    
        yield return  new WaitForSeconds(3);
        killPlayer1 = GameObject.FindGameObjectWithTag("player1");
@@ -41,10 +50,63 @@ public class SpawnManager : MonoBehaviour
             { 
                 playerTwoScore++;
 
-                if (playerTwoScore == 2)
+                if(playerTwoScore == manager.ScoreToWin)
                 {
-                    manager.gamePlaying = false;
-                    manager.showWinScreen = true;
+                    playerTwoGameScore++;
+                    playerOneScore = 0;
+                    playerTwoScore = 0;
+                }
+
+                if (playerTwoGameScore == manager.gamesToWin)
+                {
+                    if(player2.GetComponent<Renderer>().sharedMaterial == useMaterialList[0])
+                    {
+                        winScreenBackground.material = materialList[0];
+                        manager.gamePlaying = false;
+                        manager.showWinScreen = true;
+                    }
+
+                    if (player2.GetComponent<Renderer>().sharedMaterial == useMaterialList[1])
+                    {
+                        winScreenBackground.material = materialList[1];
+                        manager.gamePlaying = false;
+                        manager.showWinScreen = true;
+                    }
+
+                    if (player2.GetComponent<Renderer>().sharedMaterial == useMaterialList[2])
+                    {
+                        winScreenBackground.material = materialList[2];
+                        manager.gamePlaying = false;
+                        manager.showWinScreen = true;
+                    }
+
+                    if (player2.GetComponent<Renderer>().sharedMaterial == useMaterialList[3])
+                    {
+                        winScreenBackground.material = materialList[3];
+                        manager.gamePlaying = false;
+                        manager.showWinScreen = true;
+                    }
+
+                    if (player2.GetComponent<Renderer>().sharedMaterial == useMaterialList[4])
+                    {
+                        winScreenBackground.material = materialList[4];
+                        manager.gamePlaying = false;
+                        manager.showWinScreen = true;
+                    }
+
+                    if (player2.GetComponent<Renderer>().sharedMaterial == useMaterialList[5])
+                    {
+                        winScreenBackground.material = materialList[5];
+                        manager.gamePlaying = false;
+                        manager.showWinScreen = true;
+                    }
+
+                    if (player2.GetComponent<Renderer>().sharedMaterial == useMaterialList[6])
+                    {
+                        winScreenBackground.material = materialList[6];
+                        manager.gamePlaying = false;
+                        manager.showWinScreen = true;
+                    }
                 }
 
                 Destroy(killPlayer2);
@@ -54,19 +116,76 @@ public class SpawnManager : MonoBehaviour
             {
                 playerOneScore++;
 
-                if (playerOneScore == 2)
+                if (playerOneScore == manager.ScoreToWin)
                 {
-                    manager.gamePlaying = false;
-                    manager.showWinScreen = true;
+                    playerOneGameScore++;
+                    playerOneScore = 0;
+                    playerTwoScore = 0;
+                }
+
+                if (playerOneGameScore == manager.gamesToWin)
+                {
+                    if (player1.GetComponent<Renderer>().sharedMaterial == useMaterialList[0])
+                    {
+                        winScreenBackground.material = materialList[0];
+                        manager.gamePlaying = false;
+                        manager.showWinScreen = true;
+                    }
+
+                    if (player1.GetComponent<Renderer>().sharedMaterial == useMaterialList[1])
+                    {
+                        winScreenBackground.material = materialList[1];
+                        manager.gamePlaying = false;
+                        manager.showWinScreen = true;
+                    }
+
+                    if (player1.GetComponent<Renderer>().sharedMaterial == useMaterialList[2])
+                    {
+                        winScreenBackground.material = materialList[2];
+                        manager.gamePlaying = false;
+                        manager.showWinScreen = true;
+                    }
+
+                    if (player1.GetComponent<Renderer>().sharedMaterial == useMaterialList[3])
+                    {
+                        winScreenBackground.material = materialList[3];
+                        manager.gamePlaying = false;
+                        manager.showWinScreen = true;
+                    }
+
+                    if (player1.GetComponent<Renderer>().sharedMaterial == useMaterialList[4])
+                    {
+                        winScreenBackground.material = materialList[4];
+                        manager.gamePlaying = false;
+                        manager.showWinScreen = true;
+                    }
+
+                    if (player1.GetComponent<Renderer>().sharedMaterial == useMaterialList[5])
+                    {
+                        winScreenBackground.material = materialList[5];
+                        manager.gamePlaying = false;
+                        manager.showWinScreen = true;
+                    }
+
+                    if (player1.GetComponent<Renderer>().sharedMaterial == useMaterialList[6])
+                    {
+                        winScreenBackground.material = materialList[6];
+                        manager.gamePlaying = false;
+                        manager.showWinScreen = true;
+                    }
                 }
 
                 Destroy(killPlayer1);
             }
 
             timer.timeValue = 11;
+            domeCounter = 0;
             timer.decrementTime = true;
             safetyDome.transform.localScale = new Vector3(14, 14, 14);
+            Destroy(killDome);
             spawnPlayers();
+           // player1.GetComponent<PlayerController>().powerUpIndicator = ;
+     
             //StartCoroutine(manager.countdownToStart());
             spawnSafetyDome();
        }
@@ -85,7 +204,7 @@ public class SpawnManager : MonoBehaviour
         {
             Destroy(killDome);
             spawnSafetyDome();
-            if (domeCounter == 2 || domeCounter == 4)
+            if (domeCounter == 4 || domeCounter == 7)
             {
                 SpawnPowerup();
             }
@@ -115,6 +234,7 @@ public class SpawnManager : MonoBehaviour
     {
         Instantiate(player1, new Vector3(0, 0, 0), player1.transform.rotation);
         Instantiate(player2, new Vector3(0, 0, 6), player2.transform.rotation);
+        enemy.player = GameObject.FindGameObjectWithTag("player1");
     }
 
     void resetScene()

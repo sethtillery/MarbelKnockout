@@ -14,6 +14,9 @@ public class gameManager : MonoBehaviour
     public SpawnManager spawn;
     public Timer timer;
     public int ScoreToWin;
+    public int gamesToWin = 1;
+    public bool twoSeries = false;
+    public bool fourSeries = false;
    
     private float startTime, elapsedTime;
     TimeSpan timeplaying;
@@ -27,6 +30,18 @@ public class gameManager : MonoBehaviour
 
     public IEnumerator countdownToStart()
     {
+        if (spawn.singlePlayer)
+        {
+            GameObject.FindGameObjectWithTag("player2").GetComponent<Enemy>().enabled = true;
+            GameObject.FindGameObjectWithTag("player2").GetComponent<PlayerController1>().enabled = false;
+
+        }
+        else
+        {
+            GameObject.FindGameObjectWithTag("player2").GetComponent<Enemy>().enabled = false;
+            GameObject.FindGameObjectWithTag("player2").GetComponent<PlayerController1>().enabled = true;
+        }
+
         countdownDisplay.gameObject.SetActive(true);
         while (countdownTime > 0)
         {
@@ -57,19 +72,8 @@ public class gameManager : MonoBehaviour
     
     public void BeginGame()
     {
+
         gamePlaying = true;
         startTime = Time.time;
-    }
-   
-    
-    private void EndGame()
-    {
-        gamePlaying = false;
-       // Invoke("ShowGameOverScreen", 1.25f);
-    }
-
-    private void ShowGameOverScreen()
-    {
-        //add code later
     }
 }

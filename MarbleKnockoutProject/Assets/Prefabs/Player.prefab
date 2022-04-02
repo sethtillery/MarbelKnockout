@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2b61aa1a259aff0418d0cac593212c94, type: 2}
+  - {fileID: 2100000, guid: c61a550b3ef9afd40ba5d5bd11ec7b2d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -128,10 +128,7 @@ MonoBehaviour:
   speed: 5
   isSafe: 0
   hasPowerup: 0
-  powerUpStrength: 15
+  powerUpStrength: 5
   powerUpTime: 5
-  powerUpIndicator: {fileID: 2424808277344680160, guid: 26fe42ca45dd9834fb6de3987a3e9567, type: 3}
-  forwardInput: 0
-  sideInput: 0
   manager: {fileID: 0}
   timer: {fileID: 0}

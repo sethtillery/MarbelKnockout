@@ -7,6 +7,7 @@ public class Timer : MonoBehaviour
 {
     public float timeValue = 10f;
     public Text timeText;
+    public Text GameScoreText;
     public gameManager manager;
     public SpawnManager spawn;
     public bool decrementTime = true;
@@ -16,6 +17,7 @@ public class Timer : MonoBehaviour
     private void Start()
     {
         timeText.gameObject.SetActive(false);
+        GameScoreText.gameObject.SetActive(false);
     }
 
 
@@ -43,6 +45,15 @@ public class Timer : MonoBehaviour
         {
             timeText.gameObject.SetActive(false);
         }
+
+        if (manager.gamePlaying)
+        {
+            GameScoreText.gameObject.SetActive(true);
+            GameScoreText.text = spawn.playerOneGameScore.ToString() + " - " + spawn.playerTwoGameScore.ToString();
+
+        }
+        else
+            GameScoreText.gameObject.SetActive(false);
         
     }
 

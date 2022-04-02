@@ -12,28 +12,30 @@ public class PlayerController : MonoBehaviour
     public bool hasPowerup = false;
     public float powerUpStrength = 15;
     public float powerUpTime = 5;
-    public GameObject powerUpIndicator;
-    [SerializeField]
     private float forwardInput;
-    [SerializeField]
     private float sideInput;
     public gameManager manager;
+   // public GameObject powerUpIndicator;
 
     public Timer timer;
 
     // Start is called before the first frame update
     void Start()
     {
+        //Instantiate(powerUpIndicator, new Vector3(0, 0, 0), powerUpIndicator.transform.rotation);
+       // gameObject.transform.GetChild(0).gameObject.SetActive(false);
         manager = GameObject.Find("GameManager").GetComponent<gameManager>();
         playerRb = GetComponent<Rigidbody>();
-        powerUpOffset = powerUpIndicator.transform.position;
+       // powerUpOffset = powerUpIndicator.transform.position;
         timer = manager.timer;
     }
 
     private void Update()
     {
+        timer = manager.timer;
+
         if (timer.timeValue > 10.90 && isSafe == true)
-            isSafe = false;
+            isSafe = true;
 
         if (transform.position.y < -10)
         {
@@ -70,7 +72,7 @@ public class PlayerController : MonoBehaviour
             playerRb.AddForce(Vector3.right * sideInput * speed);
 
         
-        powerUpIndicator.transform.position = transform.position + powerUpOffset;  
+        //powerUpIndicator.transform.position = transform.position + powerUpOffset;  
     }
 
     // OnTriggerStay is called once per frame for every Collider other that is touching the trigger
@@ -91,8 +93,8 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(other.gameObject);
             hasPowerup = true;
+            gameObject.transform.GetChild(0).gameObject.SetActive(true);
             StartCoroutine(PowerupCountdownRoutine());
-            powerUpIndicator.gameObject.SetActive(true); 
         }
         if (other.CompareTag("SafetyDome"))
         {
@@ -122,6 +124,6 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(powerUpTime);
         hasPowerup = false;
-        powerUpIndicator.gameObject.SetActive(false);
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
 }

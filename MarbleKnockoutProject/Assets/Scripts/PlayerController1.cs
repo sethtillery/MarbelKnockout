@@ -21,6 +21,8 @@ public class PlayerController1 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Instantiate(powerUpIndicator, new Vector3(0, 0, 0), powerUpIndicator.transform.rotation);
+        powerUpIndicator.SetActive(false);
         manager = GameObject.Find("GameManager").GetComponent<gameManager>();
         playerRb = GetComponent<Rigidbody>();
         powerUpOffset = powerUpIndicator.transform.position;
@@ -29,8 +31,11 @@ public class PlayerController1 : MonoBehaviour
 
     private void Update()
     {
+       
+        timer = manager.timer;
+
         if (timer.timeValue > 10.90 && isSafe == true)
-            isSafe = false;
+            isSafe = true;
 
         if (transform.position.y < -10)
         {
@@ -87,8 +92,8 @@ public class PlayerController1 : MonoBehaviour
         {
             Destroy(other.gameObject);
             hasPowerup = true;
+            powerUpIndicator.SetActive(true);
             StartCoroutine(PowerupCountdownRoutine());
-            powerUpIndicator.gameObject.SetActive(true);
         }
         if (other.CompareTag("SafetyDome"))
         {
@@ -118,6 +123,6 @@ public class PlayerController1 : MonoBehaviour
     {
         yield return new WaitForSeconds(powerUpTime);
         hasPowerup = false;
-        powerUpIndicator.gameObject.SetActive(false);
+        powerUpIndicator.SetActive(false);
     }
 }
