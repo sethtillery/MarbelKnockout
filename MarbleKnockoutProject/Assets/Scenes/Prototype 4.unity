@@ -2170,6 +2170,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -191
       objectReference: {fileID: 0}
+    - target: {fileID: 4020507845955535970, guid: 32d9be9aad1572948967eeb99694faf8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4020507846503209332, guid: 32d9be9aad1572948967eeb99694faf8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4020507846968188987, guid: 32d9be9aad1572948967eeb99694faf8, type: 3}
       propertyPath: m_SizeDelta.x
       value: 719.81
@@ -2198,6 +2206,14 @@ PrefabInstance:
       propertyPath: winScreenBackground
       value: 
       objectReference: {fileID: 1465167364}
+    - target: {fileID: 4020507847284763396, guid: 32d9be9aad1572948967eeb99694faf8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4020507847286744479, guid: 32d9be9aad1572948967eeb99694faf8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4020507847633790437, guid: 32d9be9aad1572948967eeb99694faf8, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2285,6 +2301,10 @@ PrefabInstance:
     - target: {fileID: 4020507847633790457, guid: 32d9be9aad1572948967eeb99694faf8, type: 3}
       propertyPath: m_Name
       value: Main Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4020507847633790457, guid: 32d9be9aad1572948967eeb99694faf8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4299946555431621646, guid: 32d9be9aad1572948967eeb99694faf8, type: 3}
       propertyPath: m_AnchoredPosition.y

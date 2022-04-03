@@ -233,7 +233,19 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(killPlayer1)
+        if (singlePlayer && killPlayer2)
+        {
+            GameObject.FindGameObjectWithTag("player2").GetComponent<Enemy>().enabled = true;
+            GameObject.FindGameObjectWithTag("player2").GetComponent<PlayerController1>().enabled = false;
+
+        }
+        else if(!singlePlayer && killPlayer2)
+        {
+            GameObject.FindGameObjectWithTag("player2").GetComponent<Enemy>().enabled = false;
+            GameObject.FindGameObjectWithTag("player2").GetComponent<PlayerController1>().enabled = true;
+        }
+
+        if (killPlayer1)
         {
             enemy.player = GameObject.FindGameObjectWithTag("player1");
         }
