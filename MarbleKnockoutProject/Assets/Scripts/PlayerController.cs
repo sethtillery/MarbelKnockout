@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour
     public bool hasPowerup = false;
     public float powerUpStrength = 15;
     public float powerUpTime = 5;
-    private float forwardInput;
-    private float sideInput;
+    public float forwardInput;
+    public float sideInput;
     public gameManager manager;
    // public GameObject powerUpIndicator;
 

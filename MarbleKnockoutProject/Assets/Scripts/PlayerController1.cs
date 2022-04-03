@@ -13,8 +13,8 @@ public class PlayerController1 : MonoBehaviour
     public float powerUpStrength = 15;
     public float powerUpTime = 5;
     public GameObject powerUpIndicator;
-    private float forwardInput;
-    private float sideInput;
+    public float forwardInput;
+    public float sideInput;
     public gameManager manager;
     public Timer timer;
 
@@ -60,6 +60,7 @@ public class PlayerController1 : MonoBehaviour
     {
         forwardInput = Input.GetAxis("Vertical");
         sideInput = Input.GetAxis("Horizontal");
+
         if (Input.GetKey(KeyCode.UpArrow))
             playerRb.AddForce(Vector3.forward * forwardInput * speed);
 
