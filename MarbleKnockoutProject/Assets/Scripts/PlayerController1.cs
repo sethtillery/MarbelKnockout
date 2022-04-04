@@ -62,16 +62,16 @@ public class PlayerController1 : MonoBehaviour
         sideInput = Input.GetAxis("Horizontal");
 
         if (Input.GetKey(KeyCode.UpArrow))
-            playerRb.AddForce(Vector3.forward * forwardInput * speed);
+            playerRb.AddForce(Vector3.forward * speed);
 
         if (Input.GetKey(KeyCode.LeftArrow))
-            playerRb.AddForce(Vector3.right * sideInput * speed);
+            playerRb.AddForce(-Vector3.right * speed);
 
         if (Input.GetKey(KeyCode.DownArrow))
-            playerRb.AddForce(Vector3.forward * forwardInput * speed);
+            playerRb.AddForce(-Vector3.forward * speed);
 
         if (Input.GetKey(KeyCode.RightArrow))
-            playerRb.AddForce(Vector3.right * sideInput * speed);
+            playerRb.AddForce(Vector3.right * speed);
 
 
         powerUpIndicator.transform.position = transform.position + powerUpOffset;

@@ -149,5 +149,7 @@ MonoBehaviour:
   powerUpStrength: 5
   powerUpTime: 5
   powerUpIndicator: {fileID: 1785364730508032040, guid: ec42e5e0d6df4b1449bc88e72577eb81, type: 3}
+  forwardInput: 0
+  sideInput: 0
   manager: {fileID: 0}
   timer: {fileID: 0}
