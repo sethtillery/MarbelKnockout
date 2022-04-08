@@ -19,6 +19,7 @@ public class mainMenu : MonoBehaviour
     public Canvas MainMenuCanvas;
     public Text controlsText;
     public Text seriesText;
+    public Text creditsText;
     public SpawnManager spawn;
     GameObject p1;
     GameObject p2;
@@ -33,6 +34,7 @@ public class mainMenu : MonoBehaviour
 
         controlsText.gameObject.SetActive(false);
         seriesText.gameObject.SetActive(false);
+        creditsText.gameObject.SetActive(false);    // Issue here (Null reference?)
     }
 
     private void Update()
@@ -72,6 +74,9 @@ public class mainMenu : MonoBehaviour
         GameObject exitButton = MainMenuCanvas.transform.GetChild(0).Find("Quit Game Button").gameObject;
         exitButton.SetActive(false);
 
+        GameObject creditsButton = MainMenuCanvas.transform.GetChild(0).Find("Credits Button").gameObject;
+        creditsButton.SetActive(false);
+
         GameObject p1text = MainMenuCanvas.transform.GetChild(0).Find("P1 Text").gameObject;
         p1text.SetActive(false);
 
@@ -98,6 +103,9 @@ public class mainMenu : MonoBehaviour
 
         GameObject exitButton = MainMenuCanvas.transform.GetChild(0).Find("Quit Game Button").gameObject;
         exitButton.SetActive(false);
+
+        GameObject creditsButton = MainMenuCanvas.transform.GetChild(0).Find("Credits Button").gameObject;
+        creditsButton.SetActive(false);
 
         GameObject backButton = MainMenuCanvas.transform.GetChild(0).Find("Back To Main Menu From Options").gameObject;
         backButton.SetActive(true);
@@ -286,6 +294,9 @@ public class mainMenu : MonoBehaviour
         GameObject exitButton = MainMenuCanvas.transform.GetChild(0).Find("Quit Game Button").gameObject;
         exitButton.SetActive(false);
 
+        GameObject creditsButton = MainMenuCanvas.transform.GetChild(0).Find("Credits Button").gameObject;
+        creditsButton.SetActive(false);
+
         controlsText.gameObject.SetActive(true);
         GameObject backButton = MainMenuCanvas.transform.GetChild(0).Find("Back To Main Menu").gameObject;
         backButton.SetActive(true);
@@ -310,6 +321,9 @@ public class mainMenu : MonoBehaviour
 
         GameObject exitButton = MainMenuCanvas.transform.GetChild(0).Find("Quit Game Button").gameObject;
         exitButton.SetActive(true);
+
+        GameObject creditsButton = MainMenuCanvas.transform.GetChild(0).Find("Credits Button").gameObject;
+        creditsButton.SetActive(true);
     }
 
     public void BackToMainMenuFromOptions()
@@ -385,11 +399,64 @@ public class mainMenu : MonoBehaviour
 
         GameObject exitButton = MainMenuCanvas.transform.GetChild(0).Find("Quit Game Button").gameObject;
         exitButton.SetActive(true);
+
+        GameObject creditsButton = MainMenuCanvas.transform.GetChild(0).Find("Credits Button").gameObject;
+        creditsButton.SetActive(true);
     }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void Credits()
+    {
+        manager.musicList[8].Play();
+        GameObject playbutton = MainMenuCanvas.transform.GetChild(0).Find("PlayGame Button").gameObject;
+        playbutton.SetActive(false);
+
+        GameObject optionsButton = MainMenuCanvas.transform.GetChild(0).Find("Options Button").gameObject;
+        optionsButton.SetActive(false);
+
+        GameObject controlsButton = MainMenuCanvas.transform.GetChild(0).Find("Controls Button").gameObject;
+        controlsButton.SetActive(false);
+
+        GameObject exitButton = MainMenuCanvas.transform.GetChild(0).Find("Quit Game Button").gameObject;
+        exitButton.SetActive(false);
+
+        GameObject backButton = MainMenuCanvas.transform.GetChild(0).Find("Back To Main Menu From Credits").gameObject;
+        backButton.SetActive(true);
+
+        GameObject creditsButton = MainMenuCanvas.transform.GetChild(0).Find("Credits Button").gameObject;
+        creditsButton.SetActive(false);
+
+        creditsText.gameObject.SetActive(true); // Issue here (Null reference?)
+        // GameObject backButton = MainMenuCanvas.transform.GetChild(0).Find("Back To Main Menu").gameObject;
+        // backButton.SetActive(true);
+    }
+
+    public void BackToMainMenuFromCredits()
+    {
+        manager.musicList[8].Play();
+        creditsText.gameObject.SetActive(false);
+
+        GameObject backButton = MainMenuCanvas.transform.GetChild(0).Find("Back To Main Menu From Credits").gameObject;
+        backButton.SetActive(false);
+
+        GameObject playbutton = MainMenuCanvas.transform.GetChild(0).Find("PlayGame Button").gameObject;
+        playbutton.SetActive(true);
+
+        GameObject optionsButton = MainMenuCanvas.transform.GetChild(0).Find("Options Button").gameObject;
+        optionsButton.SetActive(true);
+
+        GameObject controlsButton = MainMenuCanvas.transform.GetChild(0).Find("Controls Button").gameObject;
+        controlsButton.SetActive(true);
+
+        GameObject creditsButton = MainMenuCanvas.transform.GetChild(0).Find("Credits Button").gameObject;
+        creditsButton.SetActive(true);
+
+        GameObject exitButton = MainMenuCanvas.transform.GetChild(0).Find("Quit Game Button").gameObject;
+        exitButton.SetActive(true);
     }
 
     public void TwoSeries()
