@@ -25,11 +25,11 @@ public class mainMenu : MonoBehaviour
 
     private void Start()
     {
-        p1 = GameObject.FindGameObjectWithTag("player1");
-        p2 = GameObject.FindGameObjectWithTag("player2");
+        p1 = spawn.player1;
+        p2 = spawn.player2;
 
-        rend = p1.GetComponent<Renderer>();
-        rend2 = p2.GetComponent<Renderer>();
+        rend = spawn.player1.GetComponent<Renderer>();
+        rend2 = spawn.player2.GetComponent<Renderer>();
 
         controlsText.gameObject.SetActive(false);
         seriesText.gameObject.SetActive(false);
@@ -71,6 +71,12 @@ public class mainMenu : MonoBehaviour
 
         GameObject exitButton = MainMenuCanvas.transform.GetChild(0).Find("Quit Game Button").gameObject;
         exitButton.SetActive(false);
+
+        GameObject p1text = MainMenuCanvas.transform.GetChild(0).Find("P1 Text").gameObject;
+        p1text.SetActive(false);
+
+        GameObject p2text = MainMenuCanvas.transform.GetChild(0).Find("P2 Text").gameObject;
+        p2text.SetActive(false);
 
         manager.musicList[0].Stop();
 

@@ -131,6 +131,11 @@ MonoBehaviour:
   isSafe: 0
   manager: {fileID: 0}
   timer: {fileID: 0}
+  spawn: {fileID: 0}
+  player1: {fileID: 0}
+  playerDirection: {x: 0, y: 0, z: 0}
+  domeDirection: {x: 0, y: 0, z: 0}
+  shouldLookForPlayer: 1
 --- !u!114 &-3426633493366436256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,3 +158,4 @@ MonoBehaviour:
   sideInput: 0
   manager: {fileID: 0}
   timer: {fileID: 0}
+  spawn: {fileID: 0}

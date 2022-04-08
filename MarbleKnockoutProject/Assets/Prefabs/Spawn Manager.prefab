@@ -48,8 +48,17 @@ MonoBehaviour:
   timer: {fileID: 0}
   player1: {fileID: 1837918343248922855, guid: faa2eb42bfe9d874f8fcbf6f2ef3f7fa, type: 3}
   player2: {fileID: 4810118436999522280, guid: fcf71da09188e0c42bf8b3b950e1695b, type: 3}
-  player: {fileID: 1837918343248922849, guid: faa2eb42bfe9d874f8fcbf6f2ef3f7fa, type: 3}
   manager: {fileID: 0}
   playerOneScore: 0
   playerTwoScore: 0
+  playerOneGameScore: 0
+  playerTwoGameScore: 0
   domeCounter: 0
+  colorList: []
+  winScreenBackground: {fileID: 0}
+  materialList: []
+  useMaterialList: []
+  singlePlayer: 1
+  multiplayer: 0
+  enemy: {fileID: 0}
+  enemyLookPoint: {fileID: 8142186194919414492, guid: 140146e80079c5c4fbca1e5b527ceb40, type: 3}

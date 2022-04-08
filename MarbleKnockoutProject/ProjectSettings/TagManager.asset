@@ -11,6 +11,7 @@ TagManager:
   - player2
   - powerupIndicator
   - powerUpIndicator2
+  - enemyLookPoint
   layers:
   - Default
   - TransparentFX

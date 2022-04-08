@@ -49,11 +49,12 @@ public class gameManager : MonoBehaviour
         BeginGame();
         countdownDisplay.text = "GO!";
 
+        spawn.spawnSafetyDome();
+        //spawn.enemyLookPoint = GameObject.FindGameObjectWithTag("SafetyDome").transform.GetChild(0).gameObject;
         yield return new WaitForSeconds(1f);
 
         musicList[1].Play();
         timer.timeText.gameObject.SetActive(true);
-        spawn.spawnSafetyDome();
         countdownDisplay.gameObject.SetActive(false);
     }
 
@@ -61,7 +62,6 @@ public class gameManager : MonoBehaviour
     void Start()
     {
         gamePlaying = false;
-        //StartCoroutine(countdownToStart());
     }
     
     public void BeginGame()

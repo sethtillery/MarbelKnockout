@@ -11,14 +11,21 @@ public class Enemy : MonoBehaviour
     public bool isSafe = false;
     public gameManager manager;
     public Timer timer;
+    public SpawnManager spawn;
+    public PlayerController player1;
+    public Vector3 playerDirection;
+    public Vector3 domeDirection;
+    public bool shouldLookForPlayer = true;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        spawn = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>(); 
+        player1 = GameObject.FindGameObjectWithTag("player1").GetComponent<PlayerController>();
         player = GameObject.FindGameObjectWithTag("player1");
         manager = GameObject.Find("GameManager").GetComponent<gameManager>();
         enemyRb = GetComponent<Rigidbody>();
-        
         timer = manager.timer;
     }
 
@@ -30,14 +37,37 @@ public class Enemy : MonoBehaviour
         if (timer.timeValue > 10.90 && isSafe == true)
             isSafe = true;
 
-        if (transform.position.y < -10)
+        if (transform.position.y < -15)
         {
             Destroy(gameObject);
+            manager.musicList[4].Play();
         }
 
         if (timer.timeValue < 0.00001 && !isSafe)
         {
+            if (gameObject.GetComponent<Renderer>().sharedMaterial == spawn.useMaterialList[0])
+                Instantiate(spawn.particleList[0], transform.position, transform.rotation);
+
+            if (gameObject.GetComponent<Renderer>().sharedMaterial == spawn.useMaterialList[1])
+                Instantiate(spawn.particleList[1], transform.position, transform.rotation);
+
+            if (gameObject.GetComponent<Renderer>().sharedMaterial == spawn.useMaterialList[2])
+                Instantiate(spawn.particleList[2], transform.position, transform.rotation);
+
+            if (gameObject.GetComponent<Renderer>().sharedMaterial == spawn.useMaterialList[3])
+                Instantiate(spawn.particleList[3], transform.position, transform.rotation);
+
+            if (gameObject.GetComponent<Renderer>().sharedMaterial == spawn.useMaterialList[4])
+                Instantiate(spawn.particleList[4], transform.position, transform.rotation);
+
+            if (gameObject.GetComponent<Renderer>().sharedMaterial == spawn.useMaterialList[5])
+                Instantiate(spawn.particleList[5], transform.position, transform.rotation);
+
+            if (gameObject.GetComponent<Renderer>().sharedMaterial == spawn.useMaterialList[6])
+                Instantiate(spawn.particleList[6], transform.position, transform.rotation);
+
             Destroy(gameObject);
+            manager.musicList[4].Play();
         }
     }
 
@@ -46,7 +76,6 @@ public class Enemy : MonoBehaviour
     {
         if (!other.CompareTag("SafetyDome"))
         {
-
             isSafe = true;
         }
     }
@@ -65,14 +94,22 @@ public class Enemy : MonoBehaviour
         if (other.CompareTag("SafetyDome"))
         {
             isSafe = false;
-        }
+        }     
     }
     private void FixedUpdate()
     {
-        if(gameManager.instance.gamePlaying && player)
+        if(manager.gamePlaying && shouldLookForPlayer)
+        playerDirection = (player.transform.position - transform.position).normalized;
+
+        if(manager.gamePlaying)
+             domeDirection = (GameObject.Find("SafteyDome(Clone)").transform.GetChild(0).transform.position - transform.position).normalized;
+
+        if(gameManager.instance.gamePlaying && player1.isSafe)
         {
-            Vector3 lookDirection = (player.transform.position - transform.position).normalized;
-            enemyRb.AddForce(lookDirection * speed);
+            enemyRb.AddForce(playerDirection * speed);
         }
+        else
+            enemyRb.AddForce(domeDirection * speed);
+        
     }
 }

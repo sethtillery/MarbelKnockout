@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject safetyDome;
-    private float spawnRange = 9;
+    private float spawnRange = 7;
     public GameObject powerUpPrefab;
     public Timer timer;
     GameObject killDome;
@@ -24,13 +24,16 @@ public class SpawnManager : MonoBehaviour
     public Image winScreenBackground;
     public Material[] materialList;
     public Material[] useMaterialList;
+    public ParticleSystem[] particleList;
     public bool singlePlayer = true;
     public bool multiplayer = false;
     public Enemy enemy;
+    public GameObject enemyLookPoint;
+    public bool shouldLookForPoint = true;
 
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         spawnPlayers();
         safetyDome.transform.localScale = new Vector3(14, 14, 14);
@@ -39,7 +42,6 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator waitToResetScene()
     {
-   
        yield return  new WaitForSeconds(3);
        killPlayer1 = GameObject.FindGameObjectWithTag("player1");
        killPlayer2 = GameObject.FindGameObjectWithTag("player2");
@@ -210,6 +212,7 @@ public class SpawnManager : MonoBehaviour
             domeCounter = 0;
             timer.decrementTime = true;
             safetyDome.transform.localScale = new Vector3(14, 14, 14);
+            shouldLookForPoint = false;
             Destroy(killDome);
             spawnPlayers();
 
@@ -228,7 +231,10 @@ public class SpawnManager : MonoBehaviour
             enemy.player = GameObject.FindGameObjectWithTag("player1");
 
             spawnSafetyDome();
-       }
+            shouldLookForPoint = true;
+            //enemyLookPoint = GameObject.FindGameObjectWithTag("SafetyDome").transform.GetChild(0).gameObject;
+
+        }
     }
     // Update is called once per frame
     void Update()
@@ -248,6 +254,7 @@ public class SpawnManager : MonoBehaviour
         if (killPlayer1)
         {
             enemy.player = GameObject.FindGameObjectWithTag("player1");
+            enemy.player1 = GameObject.FindGameObjectWithTag("player1").GetComponent<PlayerController>();
         }
         if(playerOneGameScore == 1 || playerTwoGameScore == 1)       
             manager.musicList[1].pitch = (float)1.5;
@@ -292,13 +299,16 @@ public class SpawnManager : MonoBehaviour
         Instantiate(safetyDome, GenerateSpawnPosition(), safetyDome.transform.rotation);
         safetyDome.transform.localScale -= new Vector3(2, 2, 2);
         domeCounter++;
+        enemyLookPoint = GameObject.Find("SafteyDome(Clone)").transform.GetChild(0).gameObject;
     }
 
     void spawnPlayers()
     {
-        Instantiate(player1, new Vector3(0, 0, 0), player1.transform.rotation);
-        Instantiate(player2, new Vector3(0, 0, 6), player2.transform.rotation);
+        Instantiate(player1, new Vector3(0, 0, 6), player1.transform.rotation);
+        Instantiate(player2, new Vector3(0, 0, 0), player2.transform.rotation);
+        enemy.player1 = GameObject.FindGameObjectWithTag("player1").GetComponent<PlayerController>();
         enemy.player = GameObject.FindGameObjectWithTag("player1");
+        enemy.shouldLookForPlayer = true;
     }
 
     void resetScene()

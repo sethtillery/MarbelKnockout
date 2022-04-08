@@ -37,13 +37,14 @@ public class PauseMenu : MonoBehaviour
     public void PauseGame()
     {
         pauseMenu.gameObject.SetActive(true);
+        manager.musicList[1].Pause();
         Time.timeScale = 0f;
         isPaused = true;
     }
 
     public void ResumeGame()
     {
-        manager.musicList[8].Play();
+        manager.musicList[1].UnPause();
         pauseMenu.gameObject.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;

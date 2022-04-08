@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public float forwardInput;
     public float sideInput;
     public gameManager manager;
+    public SpawnManager spawn;
    // public GameObject powerUpIndicator;
 
     public Timer timer;
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        spawn = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
         //Instantiate(powerUpIndicator, new Vector3(0, 0, 0), powerUpIndicator.transform.rotation);
        // gameObject.transform.GetChild(0).gameObject.SetActive(false);
         manager = GameObject.Find("GameManager").GetComponent<gameManager>();
@@ -37,7 +39,7 @@ public class PlayerController : MonoBehaviour
         if (timer.timeValue > 10.90 && isSafe == true)
             isSafe = true;
 
-        if (transform.position.y < -10)
+        if (transform.position.y < -15)
         {
             Destroy(gameObject);
             manager.musicList[4].Play();
@@ -45,6 +47,29 @@ public class PlayerController : MonoBehaviour
 
         if (timer.timeValue < 0.00001 && !isSafe)
         {
+            if (gameObject.GetComponent<Renderer>().sharedMaterial == spawn.useMaterialList[0])
+                Instantiate(spawn.particleList[0], transform.position, transform.rotation);
+
+            if (gameObject.GetComponent<Renderer>().sharedMaterial == spawn.useMaterialList[1])
+                Instantiate(spawn.particleList[1], transform.position, transform.rotation);
+
+            if (gameObject.GetComponent<Renderer>().sharedMaterial == spawn.useMaterialList[2])
+                Instantiate(spawn.particleList[2], transform.position, transform.rotation);
+
+            if (gameObject.GetComponent<Renderer>().sharedMaterial == spawn.useMaterialList[3])
+                Instantiate(spawn.particleList[3], transform.position, transform.rotation);
+
+            if (gameObject.GetComponent<Renderer>().sharedMaterial == spawn.useMaterialList[4])
+                Instantiate(spawn.particleList[4], transform.position, transform.rotation);
+
+            if (gameObject.GetComponent<Renderer>().sharedMaterial == spawn.useMaterialList[5])
+                Instantiate(spawn.particleList[5], transform.position, transform.rotation);
+
+            if (gameObject.GetComponent<Renderer>().sharedMaterial == spawn.useMaterialList[6])
+                Instantiate(spawn.particleList[6], transform.position, transform.rotation);
+
+            Enemy enemy = GameObject.FindGameObjectWithTag("player2").GetComponent<Enemy>();
+            enemy.shouldLookForPlayer = false;
             Destroy(gameObject);
             manager.musicList[4].Play();
         }
